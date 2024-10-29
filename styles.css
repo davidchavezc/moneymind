@@ -1,0 +1,21 @@
+.wordmark
+{
+    font-family: Roboto Slab;
+    text-align: center;
+}
+.login{
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+}
+.logbox{
+    display: flex;
+    margin: 4px;
+}
+.log_in_button{
+    padding: 5px;
+    display: flex;
+    justify-self: center;
+    max-width: max-content;
+}
