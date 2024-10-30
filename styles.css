@@ -1,21 +1,37 @@
-.wordmark
-{
-    font-family: Roboto Slab;
-    text-align: center;
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .login{
-    max-width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    justify-content: center;
-}
-.logbox{
     display: flex;
-    margin: 4px;
+    flex-direction: column;
+    justify-content: center;   
+}
+.wordmark,
+.logbox,
+.log_in_button {
+    margin: 6px auto;
+}
+input{
+    padding: 2px;
+}
+input:focus{
+    outline: 10px auto rgb(79, 179, 255);
 }
 .log_in_button{
-    padding: 5px;
-    display: flex;
-    justify-self: center;
-    max-width: max-content;
+    padding: 5px 10px;
+    color: white;
+    font-weight: bold;
+    border-radius: 20px;
+    border: 2px solid rgb(0, 167, 0);
+    background-color: rgb(38, 211, 38);
+    transition: opacity 0.5s, background-color 0.5s, color 0.5s;
+}
+.log_in_button:hover{
+    opacity: 70%;
+    cursor: pointer;
+}
+.log_in_button:active{
+    background-color: white;
+    color: green;
+    opacity: 100%;
 }
