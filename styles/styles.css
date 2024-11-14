@@ -1,0 +1,116 @@
+*{
+    font-family: 'Roboto';
+  }
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(245, 245, 238);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+form label {
+    margin-top: 10px;
+}
+
+form input,
+form select,
+form button {
+    padding: 8px;
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+h2 {
+    margin-top: 20px;
+}
+
+#transaction-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#transaction-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.summary {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.summary p {
+    margin: 5px 0;
+}
+.wordmark{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-shadow: 0 0 3px ;
+    transition: text-shadow 300ms;
+    color: rgb(18, 180, 56);
+}
+button{
+  padding: 10px 50px;
+  margin: 10px auto 10px auto;
+  font-size: 24px;
+  border-radius: 30px;
+  align-self: center;
+  border-style: none;
+  background-color: #2fd62f;
+  color: white;
+  font-weight: 900;
+  box-shadow: 0 0 3px #1F2937;
+  transition: padding 300ms;
+}
+select,
+input{
+  border-radius: 30px;
+  border-style: solid;
+  box-shadow: 0 0 2px #1F2937;
+  border-style: none;
+  padding: 20px;
+}
+select:active,
+input:active{
+  /* outline: solid 2px rgb(70, 70, 239); */
+  box-shadow: 0 0 2px rgb(101, 176, 237);
+}
+.container{
+    margin: 25px;
+    margin-bottom: auto;
+}
