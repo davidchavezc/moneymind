@@ -1,12 +1,13 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
     const transactionList = document.getElementById("transaction-list");
     const totalIncomeEl = document.getElementById("total-income");
     const totalExpenseEl = document.getElementById("total-expense");
     const balanceEl = document.getElementById("balance");
+    const expenseForm = document.getElementById("expense-form");
 
-    let transactions = [];
+    let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 
-    document.getElementById("expense-form").addEventListener("submit", function (e) {
+    expenseForm.addEventListener("submit", (e) => {
         e.preventDefault();
 
         const type = document.getElementById("type").value;
@@ -14,17 +15,18 @@ document.addEventListener("DOMContentLoaded", function () {
         const amount = parseFloat(document.getElementById("amount").value);
         const date = document.getElementById("date").value;
 
-        const transaction = {
-            type,
-            concept,
-            amount,
-            date
-        };
+        if (isNaN(amount) || amount <= 0) {
+            alert("Please enter a valid amount.");
+            return;
+        }
+
+        const transaction = { type, concept, amount, date };
 
         transactions.push(transaction);
+        localStorage.setItem("transactions", JSON.stringify(transactions));
         updateTransactionList();
         updateSummary();
-        this.reset();
+        expenseForm.reset();
     });
 
     function updateTransactionList() {
@@ -55,4 +57,8 @@ document.addEventListener("DOMContentLoaded", function () {
         totalExpenseEl.textContent = totalExpense.toFixed(2);
         balanceEl.textContent = balance.toFixed(2);
     }
+
+    // Initial load
+    updateTransactionList();
+    updateSummary();
 });
