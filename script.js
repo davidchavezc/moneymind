@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const date = document.getElementById("date").value;
 
         if (isNaN(amount) || amount <= 0) {
-            alert("Please enter a valid amount.");
+            alert("Por favor ingrese un monto válido.");
             return;
         }
 
@@ -31,34 +31,54 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateTransactionList() {
         transactionList.innerHTML = "";
+        transactions.forEach((transaction, index) => {
+            const transactionEl = document.createElement("li");
+            transactionEl.classList.add(transaction.type === "income" ? "income" : "expense");
 
-        transactions.forEach((transaction) => {
-            const li = document.createElement("li");
-            li.textContent = `${transaction.type === "income" ? "+" : "-"}$${transaction.amount}MN ${transaction.concept} ${transaction.date}`;
-            transactionList.appendChild(li);
+            // Format the date
+            const date = new Date(transaction.date);
+            const formattedDate = date.toLocaleDateString('es-MX', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+
+            transactionEl.innerHTML = `
+                ${formattedDate} - ${transaction.concept}: $${transaction.amount.toFixed(2)}
+                <button class="delete-btn" data-index="${index}">x</button>
+            `;
+            transactionList.appendChild(transactionEl);
+        });
+
+        // Add event listeners for delete buttons
+        document.querySelectorAll(".delete-btn").forEach(button => {
+            button.addEventListener("click", (e) => {
+                const index = e.target.getAttribute("data-index");
+                transactions.splice(index, 1);
+                localStorage.setItem("transactions", JSON.stringify(transactions));
+                updateTransactionList();
+                updateSummary();
+            });
         });
     }
 
     function updateSummary() {
-        let totalIncome = 0;
-        let totalExpense = 0;
+        const totalIncome = transactions
+            .filter(transaction => transaction.type === "income")
+            .reduce((sum, transaction) => sum + transaction.amount, 0);
 
-        transactions.forEach((transaction) => {
-            if (transaction.type === "income") {
-                totalIncome += transaction.amount;
-            } else {
-                totalExpense += transaction.amount;
-            }
-        });
+        const totalExpense = transactions
+            .filter(transaction => transaction.type === "expense")
+            .reduce((sum, transaction) => sum + transaction.amount, 0);
 
         const balance = totalIncome - totalExpense;
 
-        totalIncomeEl.textContent = totalIncome.toFixed(2);
-        totalExpenseEl.textContent = totalExpense.toFixed(2);
-        balanceEl.textContent = balance.toFixed(2);
+        totalIncomeEl.textContent = `${totalIncome.toFixed(2)}`;
+        totalExpenseEl.textContent = `${totalExpense.toFixed(2)}`;
+        balanceEl.textContent = `${balance.toFixed(2)}`;
     }
 
-    // Initial load
+    // Initial update
     updateTransactionList();
     updateSummary();
 });
