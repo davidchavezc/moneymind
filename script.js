@@ -4,8 +4,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalExpenseEl = document.getElementById("total-expense");
     const balanceEl = document.getElementById("balance");
     const expenseForm = document.getElementById("expense-form");
+    const dateInput = document.getElementById("date");
 
     let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+    let lastDeletedTransaction = null;
+
+    // Automatically open the date picker when the page loads
+    dateInput.focus();
+    dateInput.click();
 
     expenseForm.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -31,36 +37,59 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateTransactionList() {
         transactionList.innerHTML = "";
-        transactions.forEach((transaction, index) => {
-            const transactionEl = document.createElement("li");
-            transactionEl.classList.add(transaction.type === "income" ? "income" : "expense");
+        if (transactions.length === 0) {
+            const placeholder = document.createElement("li");
+            placeholder.textContent = "No hay nada por aquí";
+            placeholder.style.textAlign = "center";
+            placeholder.style.color = "#888";
+            transactionList.appendChild(placeholder);
+        } else {
+            // Ordenar el historial de movimientos por fecha
+            transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-            // Format the date
-            const date = new Date(transaction.date);
-            const formattedDate = date.toLocaleDateString('es-MX', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
+            transactions.forEach((transaction, index) => {
+                const transactionEl = document.createElement("li");
+                transactionEl.classList.add(transaction.type === "income" ? "income" : "expense");
+
+                // Format the date
+                const date = new Date(transaction.date);
+                const formattedDate = date.toLocaleDateString('es-MX', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric'
+                });
+
+                transactionEl.innerHTML = `
+                    ${formattedDate} - ${transaction.concept}: ${transaction.amount.toFixed(2)}
+                    <button class="delete-btn" data-index="${index}">Remover</button>
+                `;
+                transactionList.appendChild(transactionEl);
             });
 
-            transactionEl.innerHTML = `
-                ${formattedDate} - ${transaction.concept}: $${transaction.amount.toFixed(2)}
-                <button class="delete-btn" data-index="${index}">x</button>
-            `;
-            transactionList.appendChild(transactionEl);
-        });
+            // Add event listeners for delete buttons
+            document.querySelectorAll(".delete-btn").forEach(button => {
+                button.addEventListener("click", (e) => {
+                    const index = e.target.getAttribute("data-index");
+                    lastDeletedTransaction = transactions.splice(index, 1)[0];
+                    localStorage.setItem("transactions", JSON.stringify(transactions));
+                    updateTransactionList();
+                    updateSummary();
+                });
+            });
+        }
+    }
 
-        // Add event listeners for delete buttons
-        document.querySelectorAll(".delete-btn").forEach(button => {
-            button.addEventListener("click", (e) => {
-                const index = e.target.getAttribute("data-index");
-                transactions.splice(index, 1);
+    document.addEventListener("keydown", (e) => {
+        if (e.ctrlKey && e.key === 'z') {
+            if (lastDeletedTransaction) {
+                transactions.push(lastDeletedTransaction);
                 localStorage.setItem("transactions", JSON.stringify(transactions));
                 updateTransactionList();
                 updateSummary();
-            });
-        });
-    }
+                lastDeletedTransaction = null;
+            }
+        }
+    });
 
     function updateSummary() {
         const totalIncome = transactions
