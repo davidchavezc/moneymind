@@ -10,15 +10,23 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: start;
 }
 
 .container {
     background-color: white;
-    padding: 20px;
+    padding: 30px;
+    padding-top: 10px;
     border-radius: 8px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 400px;
+    margin: 10px;
+    margin-bottom: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 h1 {
@@ -58,6 +66,8 @@ form button:hover {
 
 h2 {
     margin-top: 20px;
+    text-align: center;
+    font-size: 1.5em;
 }
 
 #transaction-list {
@@ -68,6 +78,24 @@ h2 {
 #transaction-list li {
     padding: 10px;
     border-bottom: 1px solid #ddd;
+    position: relative; /* Add this to position the button */
+}
+
+#transaction-list li .delete-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px; /* Make the button smaller */
+    font-size: 0.8em; /* Adjust the font size */
+    position: absolute;
+    right: 10px; /* Adjust the button to the right side */
+    top: 50%;
+    transform: translateY(-50%); /* Center the button vertically */
+}
+
+#transaction-list li .delete-btn:hover {
+    background-color: darkred;
 }
 
 .summary {
@@ -104,7 +132,9 @@ input{
   box-shadow: 0 0 2px #1F2937;
   border-style: none;
   padding: 20px;
+  width: 100%;
 }
+
 select:active,
 input:active{
   /* outline: solid 2px rgb(70, 70, 239); */
@@ -116,4 +146,12 @@ input:active{
 }
 h2{
     text-align: center;
+}
+
+.income {
+    color: rgb(60, 155, 60);
+}
+
+.expense {
+    color: rgb(255, 70, 70);
 }
