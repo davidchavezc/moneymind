@@ -11,7 +11,6 @@ body {
     align-items: center;
     height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: start;
 }
 
@@ -79,6 +78,7 @@ h2 {
     padding: 10px;
     border-bottom: 1px solid #ddd;
     position: relative; /* Add this to position the button */
+    /* text-wrap: wrap; */
 }
 
 #transaction-list li .delete-btn {
@@ -86,12 +86,14 @@ h2 {
     color: white;
     border: none;
     cursor: pointer;
-    padding: 5px 10px; /* Make the button smaller */
-    font-size: 0.8em; /* Adjust the font size */
+    padding: 2px 10px; 
+    font-size: 0.8em; 
     position: absolute;
-    right: 10px; /* Adjust the button to the right side */
-    top: 50%;
-    transform: translateY(-50%); /* Center the button vertically */
+    right: 10px;
+    top: 25%;
+    border-radius: 0px;
+    box-shadow: none;
+    transform: translateY(-50%);
 }
 
 #transaction-list li .delete-btn:hover {

@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
     let lastDeletedTransaction = null;
 
-    // Automatically open the date picker when the page loads
     dateInput.focus();
     dateInput.click();
 
@@ -25,6 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Por favor ingrese un monto válido.");
             return;
         }
+
+        
 
         const transaction = { type, concept, amount, date };
 
@@ -59,8 +60,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     year: 'numeric'
                 });
 
+                const formattedAmount = new Intl.NumberFormat('es-MX', {currency: 'MXN', style: 'currency'}).format(transaction.amount);
+
                 transactionEl.innerHTML = `
-                    ${formattedDate} - ${transaction.concept}: ${transaction.amount.toFixed(2)}
+                    ${formattedDate} | ${formattedAmount} | ${transaction.concept} 
                     <button class="delete-btn" data-index="${index}">Remover</button>
                 `;
                 transactionList.appendChild(transactionEl);
