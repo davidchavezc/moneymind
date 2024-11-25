@@ -1,6 +1,6 @@
 *{
     font-family: 'Roboto';
-  }
+}
 body {
     font-family: Arial, sans-serif;
     background-color: rgb(245, 245, 238);
@@ -125,16 +125,12 @@ h2 {
     color: rgb(18, 180, 56);
 }
 button{
-  padding: 10px 50px;
   margin: 10px auto 10px auto;
-  font-size: 24px;
-  border-radius: 30px;
-  align-self: center;
-  border-style: none;
+  border-radius: 100px  ;
   background-color: #2fd62f;
   color: white;
   font-weight: 900;
-  box-shadow: 0 0 3px #1F2937;
+  box-shadow: 0 0 1px #1F2937;
   transition: padding 300ms;
 }
 select,
