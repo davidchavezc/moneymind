@@ -10,38 +10,43 @@
         <title>moneymind</title>
     </head>
 <body>
-    <div class="container" id="summaryModule">
-        <h1>Saldo disponible</h1>
-        <section class="summary">
-            <span id="balance" class="balanceShow">0</span>
-            <div class="balanceContainer">
-                <p>Ingresos: $<span id="total-income">0</span></p>
-                <p>Gastos: $<span id="total-expense">0</span></p>
-            </div>
-        </section>
+    <div class="header">
+        <h1 class="wordmark"><a class="wordmark" href="index.html">moneymind</a></h1>
     </div>
-    <div class="container" id="registerTransaction">
-            <h1>Registrar Gasto</h1>
-        <section id="transaccionRegistro">
-            <form id="expense-form">
-                <label for="concept">Concepto</label>
-                <input type="text" id="concept" required>
-                <label for="amount">Monto</label>
-                <input type="number" id="amount" required>
-                <label for="date">Fecha</label>
-                <input type="date" id="date" required>
-                <select id="type">
-                    <option class="optionIncome" value="income">Ingreso</option>
-                    <option  class="optionExpense" value="expense">Gasto</option>
-                </select>
-                <button type="submit">Registrar</button>
-            </form>
-        </section>
-    </div>
-    <div class="container" id="transactionRegistry">
-            <h1>Historial de Movimientos</h1>
-            <ul id="transaction-list"></ul>
-    </div>
+    <div class="modules">
+        <div class="container" id="summaryModule">
+            <h1>Saldo disponible</h1>
+            <section class="summary">
+                <span id="balance" class="balanceShow">0</span>
+                <div class="balanceContainer">
+                    <p>Ingresos: $<span id="total-income">0</span></p>
+                    <p>Gastos: $<span id="total-expense">0</span></p>
+                </div>
+            </section>
+        </div>
+        <div class="container" id="registerTransaction">
+                <h1>Registrar Gasto</h1>
+            <section id="transaccionRegistro">
+                <form id="expense-form">
+                    <label for="concept">Concepto</label>
+                    <input type="text" id="concept" required>
+                    <label for="amount">Monto</label>
+                    <input type="number" id="amount" required>
+                    <label for="date">Fecha</label>
+                    <input type="date" id="date" required>
+                    <select id="type">
+                        <option class="optionIncome" value="income">Ingreso</option>
+                        <option  class="optionExpense" value="expense">Gasto</option>
+                    </select>
+                    <button type="submit">Registrar</button>
+                </form>
+            </section>
+        </div>
+        <div class="container" id="transactionRegistry">
+                <h1>Historial de Movimientos</h1>
+                <ul id="transaction-list"></ul>
+        </div>
+    </modules>
     <script src="script.js"></script>
 </body>
 </html>
