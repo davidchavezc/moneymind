@@ -18,6 +18,9 @@ ul{
 select{
     margin: 16px auto 16px 2px;
 }
+h1{
+    text-align: center;
+}
 .container {
     display: flex;
     flex-direction: column;
@@ -67,4 +70,18 @@ select{
 }
 .summary{
     display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* max-height: 10em; */
+}
+#summaryModule{
+    max-height: 10em;
+}
+.balanceContainer{
+    display: flex;
+    flex-direction: column;
+} 
+.balanceShow{
+    font-size: 3em;
+    color: #595959;
 }
