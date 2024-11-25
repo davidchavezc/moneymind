@@ -18,7 +18,10 @@ em{
     background-color: #2bbe2b;
     color: white;
     padding: 0px 10px;
-    
+}
+a{
+  text-decoration: none;
+  color: white;
 }
 .wordmark{
   font-family: Georgia, 'Times New Roman', Times, serif;
