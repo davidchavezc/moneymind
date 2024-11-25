@@ -61,10 +61,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
 
                 const formattedAmount = new Intl.NumberFormat('es-MX', {currency: 'MXN', style: 'currency'}).format(transaction.amount);
-
                 transactionEl.innerHTML = `
-                    ${formattedDate} | ${formattedAmount} | ${transaction.concept} 
-                    <button class="delete-btn" data-index="${index}">Remover</button>
+                ${formattedDate} | ${formattedAmount} | ${transaction.concept} 
+                <button class="delete-btn" data-index="${index}">Remover</button>
                 `;
                 transactionList.appendChild(transactionEl);
             });
@@ -81,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
     }
-
+    
     document.addEventListener("keydown", (e) => {
         if (e.ctrlKey && e.key === 'z') {
             if (lastDeletedTransaction) {
@@ -93,23 +92,24 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     });
-
+    
     function updateSummary() {
         const totalIncome = transactions
             .filter(transaction => transaction.type === "income")
             .reduce((sum, transaction) => sum + transaction.amount, 0);
-
-        const totalExpense = transactions
+            
+            const totalExpense = transactions
             .filter(transaction => transaction.type === "expense")
             .reduce((sum, transaction) => sum + transaction.amount, 0);
-
-        const balance = totalIncome - totalExpense;
-
-        totalIncomeEl.textContent = `${totalIncome.toFixed(2)}`;
-        totalExpenseEl.textContent = `${totalExpense.toFixed(2)}`;
-        balanceEl.textContent = `${balance.toFixed(2)}`;
-    }
-
+            
+            const balance = totalIncome - totalExpense;
+            const formattedBalance = new Intl.NumberFormat('es-MX', {currency: 'MXN', style: 'currency'}).format(balance);
+            
+            totalIncomeEl.textContent = `${totalIncome.toFixed(2)}`;
+            totalExpenseEl.textContent = `${totalExpense.toFixed(2)}`;
+            balanceEl.textContent = `${formattedBalance}`;
+        }
+        
     // Initial update
     updateTransactionList();
     updateSummary();
